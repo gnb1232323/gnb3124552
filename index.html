@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>ЭЛЕКТРОТЕХСНАБ — Горизонтальное направленное бурение (ГНБ)</title>
+  
+  <!-- Подключаем шрифт Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://i.imgur.com/JS3SHrA.jpeg" 
+    rel="stylesheet"
+  >
+  
+  <style>
+    /* ======= СБРОС / БАЗОВЫЕ СТИЛИ ======= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    body {
+      color: #333;
+      background: #f0f2f5;
+    }
+
+    /* ======= ШАПКА (фиксированное меню) ======= */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 999;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 15px 20px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .navbar-logo .logo-img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+    .navbar-logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #0563bb;
+      text-decoration: none;
+    }
+    .navbar-menu {
+      display: flex;
+      gap: 20px;
+    }
+    .navbar-menu a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .navbar-menu a:hover {
+      color: #0563bb;
+    }
+
+    /* ======= ГЕРОЙ-СЕКЦИЯ ======= */
+    .hero {
+      height: 100vh;
+      background: 
+        linear-gradient(
+          to right, 
+          rgba(5, 99, 187, 0.7) 0%, 
+          rgba(85, 149, 233, 0.7) 100%
+        ), 
+        url('https://i.imgur.com/Htid9yx.png') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+    }
+    .hero-content {
+      max-width: 800px;
+    }
+    .hero-content h1 {
+      font-size: 2.6rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      font-weight: 300;
+    }
+    .hero-content .hero-btn {
+      background: #fff;
+      color: #0563bb;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .hero-content .hero-btn:hover {
+      background: #ffdf00;
+      color: #333;
+    }
+
+    /* Отступ для подфиксированной шапки */
+    .offset-top {
+      margin-top: 100px;
+    }
+
+    /* ======= ОБЩИЙ КОНТЕЙНЕР СЕКЦИЙ ======= */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    section {
+      margin-bottom: 60px;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #0563bb;
+      position: relative;
+    }
+    section h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #0563bb;
+      margin: 20px auto 0 auto;
+      border-radius: 2px;
+    }
+    section p {
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* ======= УСЛУГИ (services) - 2 колонки ======= */
+    .services-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      justify-items: center;
+    }
+    @media (max-width: 768px) {
+      .services-list {
+        grid-template-columns: 1fr;
+      }
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      width: 350px;
+      padding: 25px;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+    .service-card h3 {
+      margin-bottom: 15px;
+      color: #0563bb;
+    }
+    .service-card ul {
+      list-style: disc inside;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .service-btn {
+      display: inline-block;
+      margin-top: 15px;
+      background: #0563bb;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .service-btn:hover {
+      background: #ffdf00;
+      color: #333;
+    }
+
+    /* ======= КАРУСЕЛЬ ДЛЯ ДОПОЛНИТЕЛЬНЫХ УСЛУГ (широкие карточки) ======= */
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 1200px; 
+      margin: 0 auto;
+      border-radius: 8px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    /* Каждая карточка во всю ширину */
+    .carousel-item {
+      flex: 0 0 100%; 
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin: 10px;
+      padding: 30px;
+      box-sizing: border-box;
+    }
+    .additional-service-card h3 {
+      margin-bottom: 15px;
+      color: #0563bb;
+      font-size: 1.4rem;
+    }
+    .additional-service-card p {
+      line-height: 1.5;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 2rem;
+      background: rgba(0,0,0,0.3);
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 4px;
+    }
+    .carousel-btn:hover {
+      background: rgba(0,0,0,0.5);
+    }
+    .carousel-btn.left {
+      left: 10px;
+    }
+    .carousel-btn.right {
+      right: 10px;
+    }
+
+    /* ======= КАЛЬКУЛЯТОР ======= */
+    .calculator-section {
+      background: linear-gradient(to right, #e1f5fe, #ffffff);
+      border-radius: 8px;
+      padding: 40px;
+      margin-bottom: 60px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+    .calculator-section::before {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(5, 99, 187, 0.1);
+      border-radius: 50%;
+      top: -100px;
+      right: -100px;
+      z-index: 0;
+    }
+    .calculator-container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+    .calc-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      min-width: 280px;
+    }
+    .calc-box h4 {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      color: #0563bb;
+      text-align: center;
+    }
+    .calc-label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .calc-length-input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 0.9rem;
+    }
+    .diameters-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      justify-content: center;
+    }
+    .diameter-option {
+      position: relative;
+    }
+    .diameter-option input[type="radio"] {
+      display: none;
+    }
+    .diameter-option label {
+      display: inline-block;
+      cursor: pointer;
+      background: #f0f0f0;
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 2px solid #ccc;
+      color: #333;
+      transition: 0.3s;
+      font-size: 0.9rem;
+      min-width: 60px;
+      text-align: center;
+    }
+    .diameter-option input[type="radio"]:checked + label {
+      background: #0563bb;
+      color: #fff;
+      border-color: #0563bb;
+    }
+    .calc-result {
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 15px 0;
+      color: #0563bb;
+    }
+    .calc-button {
+      display: inline-block;
+      background: #0563bb;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .calc-button:hover {
+      background: #ffdf00;
+      color: #333;
+    }
+
+    /* ======= ТЕХНОЛОГИИ (шаги + видео) ======= */
+    .tech-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .tech-step {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 25px;
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .tech-step:hover {
+      transform: translateY(-5px);
+    }
+    .tech-step .tech-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+    .tech-step h3 {
+      color: #0563bb;
+      margin-bottom: 10px;
+    }
+    .tech-video {
+      margin-top: 30px;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .tech-video iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      display: block;
+    }
+
+    /* ======= ГАЛЕРЕЯ (gallery) ======= */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .gallery-item {
+      background: #fff;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .gallery-item:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-caption {
+      padding: 10px;
+      font-weight: 600;
+      color: #333;
+      text-align: center;
+    }
+
+    /* ======= КОНТАКТЫ (contacts) ======= */
+    .contacts-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .contacts-info {
+      flex: 1 1 350px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 20px;
+      min-width: 300px;
+    }
+    .contacts-info p {
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .contacts-info a {
+      color: #0563bb;
+    }
+    .contact-form {
+      flex: 1 1 350px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      padding: 20px;
+      min-width: 300px;
+    }
+    .contact-form h3 {
+      margin-bottom: 15px;
+      color: #0563bb;
+    }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form button {
+      width: 100%;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      background: #0563bb;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .contact-form button:hover {
+      background: #ffdf00;
+      color: #333;
+    }
+    .map-container {
+      width: 100%;
+      margin-top: 30px;
+    }
+    .map {
+      width: 100%;
+      height: 350px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    /* ======= ПОДВАЛ ======= */
+    footer {
+      background: #0563bb;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* ======= АДАПТИВНОСТЬ ======= */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      .calc-length-input {
+        margin-bottom: 20px;
+      }
+      .tech-video iframe {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header>
+    <div class="navbar">
+      <a href="#" class="navbar-logo">
+        <img 
+          src="https://i.imgur.com/IYbGj0Y.png" 
+          alt="Логотип" 
+          class="logo-img"
+        >
+        ЭЛЕКТРОТЕХСНАБ
+      </a>
+      <div class="navbar-menu">
+        <a href="#main">Главная</a>
+        <a href="#services">Услуги</a>
+        <a href="#map">Карта выполненных работ</a>
+        <a href="#technologies">Технологии</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#contacts">Контакты</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Герой-секция -->
+  <section class="hero" id="main">
+    <div class="hero-content">
+      <h1>Монтаж инженерных сетей безтраншейным способом</h1>
+      <p>Мы более 20 лет внедряем передовые технологии ГНБ. Выполняем то, что другим не под силу!</p>
+      <!-- Кнопка — переход в WhatsApp с готовым текстом -->
+      <div 
+        class="hero-btn" 
+        onclick="orderService()"
+      >
+        Заказать услугу
+      </div>
+    </div>
+  </section>
+
+  <div class="offset-top"></div>
+
+  <!-- Услуги (2 колонки) -->
+  <section id="services" class="section-container">
+    <h2>Услуги</h2>
+    <div class="services-list">
+      <!-- 1. ГНБ под ключ -->
+      <div class="service-card">
+        <h3>ГНБ под ключ</h3>
+        <p>Полный цикл: от проектирования до сдачи объекта. Точные траектории и высокое качество.</p>
+        <ul>
+          <li>Проектирование</li>
+          <li>Бурение пилотной скважины</li>
+          <li>Расширение и протягивание трубы</li>
+        </ul>
+      </div>
+
+      <!-- 2. Прокладка дюкера методом ГНБ -->
+      <div class="service-card">
+        <h3>Прокладка дюкера методом ГНБ</h3>
+        <p>
+          Технически сложная прокладка стального футляра (дюкера) под руслами рек или дорогами.
+          Дополнительная защита трубопровода.
+        </p>
+      </div>
+
+      <!-- 3. Услуги и аренда механизмов -->
+      <div class="service-card">
+        <h3>Услуги и аренда механизмов</h3>
+        <p>
+          Предоставляем широкий спектр строительной спецтехники для выполнения различных задач.
+          В нашем парке – экскаваторы, самосвалы, буровые установки и др.
+        </p>
+        <a href="machines.html" class="service-btn">Посмотреть технику</a>
+      </div>
+
+      <!-- 4. Сварочные работы -->
+      <div class="service-card">
+        <h3>Сварочные работы</h3>
+        <p>
+          Выполняем сварку металлических конструкций, труб и фитингов любой сложности.
+          Используем профессиональное оборудование и сертифицированных специалистов.
+        </p>
+      </div>
+
+      <!-- 5. Земляные работы -->
+      <div class="service-card">
+        <h3>Земляные работы</h3>
+        <p>
+          Осуществляем подготовку строительных площадок, рытьё котлованов, траншей 
+          и другие виды земляных работ в сжатые сроки.
+        </p>
+      </div>
+
+      <!-- 6. Сдаём в аренду производственные помещения -->
+      <div class="service-card">
+        <h3>Сдаём в аренду производственные помещения</h3>
+        <p>
+          Просторные и оборудованные площади для размещения цехов, складов и 
+          производственных линий. Гибкие условия аренды.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Дополнительные услуги (широкая карусель) -->
+  <section class="section-container">
+    <h2>Дополнительные услуги</h2>
+    <div class="carousel-container" id="additionalServicesCarousel">
+      <button class="carousel-btn left" onclick="slideCarousel(-1)">&#10094;</button>
+      
+      <div class="carousel-track" id="carouselTrack">
+        
+        <!-- 1 -->
+        <div class="carousel-item">
+          <div class="additional-service-card">
+            <h3>Горизонтальное направленное бурение</h3>
+            <p>Прокладка коммуникаций под землёй, сохраняя дорожное покрытие и экологию.</p>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="carousel-item">
+          <div class="additional-service-card">
+            <h3>Бестраншейная прокладка труб</h3>
+            <p>Укладываем трубы различного диаметра без масштабных раскопок.</p>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="carousel-item">
+          <div class="additional-service-card">
+            <h3>Бестраншейная прокладка кабеля</h3>
+            <p>Надёжное решение для электрики и связи, без разрытия длинных траншей.</p>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="carousel-item">
+          <div class="additional-service-card">
+            <h3>Прокладка газопровода методом ГНБ</h3>
+            <p>Безопасная прокладка газовых труб под дорогами и реками.</p>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="carousel-item">
+          <div class="additional-service-card">
+            <h3>Прокладка водопровода методом ГНБ</h3>
+            <p>Высокая точность и надёжность при прокладке систем водоснабжения.</p>
+          </div>
+        </div>
+        <!-- ... добавьте по необходимости ... -->
+
+      </div>
+
+      <button class="carousel-btn right" onclick="slideCarousel(1)">&#10095;</button>
+    </div>
+  </section>
+
+  <!-- Калькулятор цены -->
+  <section id="calculator" class="section-container">
+    <h2>Калькулятор цены</h2>
+    <div class="calculator-section">
+      <div class="calculator-container">
+        <!-- Бокс с вводом длины -->
+        <div class="calc-box">
+          <h4>Длина бурения</h4>
+          <label for="calcLength" class="calc-label">Общая длина (м):</label>
+          <input 
+            type="number" 
+            id="calcLength" 
+            class="calc-length-input" 
+            placeholder="Введите длину (м)" 
+            min="1" 
+            value="100"
+            oninput="calculatePrice()"
+          >
+        </div>
+        
+        <!-- Бокс с выбором диаметра -->
+        <div class="calc-box">
+          <h4>Диаметр ПНД</h4>
+          <label class="calc-label">Выберите диаметр трубы:</label>
+          <div class="diameters-list" id="diametersList"></div>
+        </div>
+      </div>
+
+      <div class="calc-result" id="calcResult">Итоговая цена: 0 тг</div>
+      <div 
+        class="calc-button" 
+        onclick="calculatePrice()"
+      >
+        Рассчитать
+      </div>
+    </div>
+  </section>
+
+  <!-- КАРТА ВЫПОЛНЕННЫХ РАБОТ -->
+  <section id="map" class="section-container">
+    <h2>Карта выполненных работ</h2>
+    <p>Ниже отмечены наши объекты (более 60) по всему региону.</p>
+    <div id="projectsMap" style="width: 100%; height: 500px;"></div>
+  </section>
+
+  <!-- ТЕХНОЛОГИИ (4 шага + видео) -->
+  <section id="technologies" class="section-container">
+    <h2>Технологии — как работает ГНБ</h2>
+    <div class="tech-steps">
+      <div class="tech-step">
+      
+        <h3>1. Пилотное бурение</h3>
+        <p>
+          Специальная буровая головка с локатором прокладывает пилотную скважину
+          строго по заданной траектории, обходя существующие коммуникации.
+        </p>
+      </div>
+      <div class="tech-step">
+        
+        <h3>2. Расширение</h3>
+        <p>
+          При необходимости заложить крупный диаметр: производиться поэтапное расширение скважины до нужного размера.
+        </p>
+      </div>
+      <div class="tech-step">
+       
+        <h3>3. Протяжка трубы</h3>
+        <p>
+          Когда проход сформирован, затягиваем саму трубу или кабель.  
+          Грунт не требует масштабного восстановления.
+        </p>
+      </div>
+      <div class="tech-step">
+     
+        <h3>4. Контроль и сдача</h3>
+        <p>
+          Завершаем объект проверкой соответствия проекту.
+          Дорожное покрытие остаётся неповреждённым.
+        </p>
+      </div>
+    </div>
+
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ГАЛЕРЕЯ -->
+  <section id="gallery" class="section-container">
+    <h2>Галерея техники</h2>
+    <p>
+      Ниже представлена основная техника, используемая нами для ГНБ и других работ.
+      Это лишь часть нашего автопарка.
+    </p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/W8ocyaS.jpeg" 
+          alt="Описание техники 1"
+        />
+        <div class="gallery-caption">Vermeer D7x11</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/Dl80lzh.png" 
+          alt="Описание техники 2"
+        />
+        <div class="gallery-caption">MAN тягач</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/x9BZP4h.jpeg" 
+          alt="Описание техники 3"
+        />
+        <div class="gallery-caption">XZ320 буровая установка</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/O344b6h.jpeg" 
+          alt="Описание техники 4"
+        />
+        <div class="gallery-caption">КАМАЗ-самосвал</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/45xTnJ5.jpeg" 
+          alt="Описание техники 5"
+        />
+        <div class="gallery-caption">Экскаватор-погрузчик JCB</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/A1St43P.png" 
+          alt="Описание техники 6"
+        />
+        <div class="gallery-caption">Гусеничный экскаватор Doosan</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/UHGb6Mo.jpeg" 
+          alt="Описание техники 7"
+        />
+        <div class="gallery-caption">hyundai Robex 210LC 17 метров стрела</div>
+      </div>
+      <div class="gallery-item">
+        <img 
+          src="https://i.imgur.com/wF9KIkF.png"
+          alt="Описание техники 8" 
+        />
+        <div class="gallery-caption">Vermeer D24x40</div>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 30px; font-weight: 600;">
+      И это ещё не всё!<br>
+      Мы постоянно пополняем наш автопарк.
+    </p>
+  </section>
+
+  <!-- Контакты -->
+  <section id="contacts" class="section-container">
+    <h2>Контакты</h2>
+    <div class="contacts-section">
+      <div class="contacts-info">
+        <p><strong>Телефоны:</strong></p>
+        <p>+7 (727) 383-30-48</p>
+        <p>+7 (727) 279-23-19</p>
+
+        <p><strong>Email:</strong> <a href="mailto:ets.02@mail.ru">ets.02@mail.ru</a></p>
+        <p><strong>Адрес офиса:</strong> г. Алматы, ул. Булкушева, 9</p>
+
+        <div class="map-container">
+          <iframe
+            class="map"
+            src="https://www.google.com/maps?q=43.2769332,76.9220102&z=17&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Форма, при отправке – переходим в WhatsApp -->
+      <form class="contact-form" id="whatsappForm" onsubmit="sendToWhatsApp(event)">
+        <h3>Оставьте заявку</h3>
+        <input type="text" id="nameField" name="name" placeholder="Ваше имя" required />
+        <input type="tel" id="phoneField" name="phone" placeholder="Телефон" required />
+        <textarea id="messageField" name="message" rows="4" placeholder="Сообщение" required></textarea>
+        <button type="submit">Отправить</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Подвал -->
+  <footer>
+    <p>&copy; 2024 ЭЛЕКТРОТЕХСНАБ. Все права защищены.</p>
+  </footer>
+
+  <!-- JS: Переход в WhatsApp по клику «Заказать услугу» -->
+  <script>
+    function orderService() {
+      const whatsappNumber = '77777470986';
+      const text = 'Здравствуйте! Хочу заказать услугу ГНБ у компании ЭЛЕКТРОТЕХСНАБ.';
+      const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+      window.open(link, '_blank');
+    }
+  </script>
+
+  <!-- JS: Переадресация формы в WhatsApp -->
+  <script>
+    const whatsappNumber = '77777470986';
+
+    function sendToWhatsApp(event) {
+      event.preventDefault();
+      const name = document.getElementById('nameField').value.trim();
+      const phone = document.getElementById('phoneField').value.trim();
+      const message = document.getElementById('messageField').value.trim();
+
+      const text = `Имя: ${name}%0AТелефон: ${phone}%0AСообщение: ${message}`;
+      const whatsappLink = `https://wa.me/${whatsappNumber}?text=${text}`;
+      window.open(whatsappLink, '_blank');
+    }
+  </script>
+
+  <!-- JS: Калькулятор -->
+  <script>
+    const diameterPrices = {
+      63: 12000,
+      110: 15000,
+      160: 18500,
+      200: 22500,
+      225: 23500,
+      255: 27500,
+      280: 29250,
+      300: 32500,
+      315: 34000,
+      355: 37750,
+      400: 47500,
+      450: 54000,
+      500: 60500
+    };
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const diametersListEl = document.getElementById('diametersList');
+      const keys = Object.keys(diameterPrices);
+
+      let first = true;
+      keys.forEach(d => {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('diameter-option');
+
+        const inputId = 'diameter_' + d;
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'diameter';
+        input.value = d;
+        input.id = inputId;
+
+        if (first) {
+          input.checked = true;
+          first = false;
+        }
+
+        const label = document.createElement('label');
+        label.setAttribute('for', inputId);
+        label.textContent = d + ' мм';
+
+        wrapper.appendChild(input);
+        wrapper.appendChild(label);
+        diametersListEl.appendChild(wrapper);
+      });
+
+      calculatePrice();
+    });
+
+    function calculatePrice() {
+      const length = parseFloat(document.getElementById('calcLength').value) || 0;
+      const diameterInputs = document.getElementsByName('diameter');
+      let selectedDiameter = 63;
+      for (let i = 0; i < diameterInputs.length; i++) {
+        if (diameterInputs[i].checked) {
+          selectedDiameter = parseInt(diameterInputs[i].value);
+          break;
+        }
+      }
+      const pricePerMeter = diameterPrices[selectedDiameter] || 0;
+      const total = pricePerMeter * length;
+
+      const resultEl = document.getElementById('calcResult');
+      resultEl.textContent = `Итоговая цена: ${total.toLocaleString('ru')} тг`;
+    }
+  </script>
+
+  <!-- JS: Карусель "Доп. услуги" (по одной карточке) -->
+  <script>
+    let currentIndex = 0;
+
+    function slideCarousel(direction) {
+      const track = document.getElementById('carouselTrack');
+      const items = track.querySelectorAll('.carousel-item');
+      const totalSlides = items.length;
+
+      // Кликаем влево -> direction=-1, вправо -> direction=1
+      currentIndex += direction;
+
+      // Ограничим, чтобы не уходить за границы
+      if (currentIndex < 0) currentIndex = 0;
+      if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+
+      // Сдвигаем трек: каждая карточка = 100%
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  </script>эжэжэжэжэжэ
+
+  <!-- JS: Google Maps -->
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtejkm2hJwzGsNt_lA3v0K3gP54a74n4Y&callback=initMap">
+  </script>
+  <script>
+    const projectMarkers = [
+       { lat: 43.317395, lng: 76.970348, title: 'ГНБ-проект №1' },
+  { lat: 43.265969, lng: 76.885835, title: 'ГНБ-проект №2' },
+  { lat: 43.292400, lng: 76.855930, title: 'ГНБ-проект №3' },
+  { lat: 43.294099, lng: 76.860125, title: 'ГНБ-проект №4' },
+  { lat: 43.294014, lng: 76.861077, title: 'ГНБ-проект №5' },
+  { lat: 43.295956, lng: 76.861625, title: 'ГНБ-проект №6' },
+  { lat: 43.318218, lng: 76.885652, title: 'ГНБ-проект №7' },
+  { lat: 43.314033, lng: 77.020834, title: 'ГНБ-проект №8' },
+  { lat: 43.297008, lng: 76.984385, title: 'ГНБ-проект №9' },
+  { lat: 43.252083, lng: 76.824148, title: 'ГНБ-проект №10' },
+  { lat: 44.352783, lng: 77.967173, title: 'ГНБ-проект №11' },
+  { lat: 43.262928, lng: 76.859075, title: 'ГНБ-проект №12' },
+  { lat: 43.426454, lng: 76.910260, title: 'ГНБ-проект №13' },
+  { lat: 43.270329, lng: 76.957242, title: 'ГНБ-проект №14' },
+  { lat: 43.232776, lng: 76.946732, title: 'ГНБ-проект №15' },
+  { lat: 43.388340, lng: 77.114908, title: 'ГНБ-проект №16' },
+  { lat: 43.191143, lng: 76.832513, title: 'ГНБ-проект №17' },
+  { lat: 43.182991, lng: 76.942377, title: 'ГНБ-проект №18' },
+  { lat: 43.189802, lng: 76.965031, title: 'ГНБ-проект №19' },
+  { lat: 43.371034, lng: 76.950855, title: 'ГНБ-проект №20' },
+  { lat: 43.855302, lng: 77.050512, title: 'ГНБ-проект №21' },
+  { lat: 44.353647, lng: 77.969527, title: 'ГНБ-проект №22' },
+  { lat: 43.592466, lng: 78.253250, title: 'ГНБ-проект №23' },
+  { lat: 43.402497, lng: 77.593734, title: 'ГНБ-проект №24' },
+  { lat: 43.305775, lng: 77.232114, title: 'ГНБ-проект №25' },
+  { lat: 43.307289, lng: 77.059150, title: 'ГНБ-проект №26' },
+  { lat: 43.350428, lng: 76.955156, title: 'ГНБ-проект №27' },
+  { lat: 43.351483, lng: 76.951455, title: 'ГНБ-проект №28' },
+  { lat: 43.353865, lng: 76.959625, title: 'ГНБ-проект №29' },
+  { lat: 43.375124, lng: 77.007875, title: 'ГНБ-проект №30' },
+  { lat: 43.281622, lng: 76.975188, title: 'ГНБ-проект №31' },
+  { lat: 43.286346, lng: 76.980418, title: 'ГНБ-проект №32' },
+  { lat: 43.251306, lng: 76.964381, title: 'ГНБ-проект №33' },
+  { lat: 43.195510, lng: 76.863579, title: 'ГНБ-проект №34' },
+  { lat: 43.211737, lng: 76.838009, title: 'ГНБ-проект №35' },
+  { lat: 43.224879, lng: 76.823801, title: 'ГНБ-проект №36' },
+  { lat: 43.204035, lng: 76.758759, title: 'ГНБ-проект №37' },
+  { lat: 43.198924, lng: 76.620718, title: 'ГНБ-проект №38' },
+  { lat: 43.212318, lng: 76.624586, title: 'ГНБ-проект №39' },
+  { lat: 49.823310, lng: 73.094549, title: 'ГНБ-проект №40' },
+  { lat: 49.798048, lng: 73.047729, title: 'ГНБ-проект №41' },
+  { lat: 43.983253, lng: 77.466909, title: 'ГНБ-проект №42' },
+  { lat: 43.673838, lng: 77.108186, title: 'ГНБ-проект №43' },
+  { lat: 43.351869, lng: 77.000358, title: 'ГНБ-проект №44' },
+  { lat: 43.325932, lng: 76.980722, title: 'ГНБ-проект №45' },
+  { lat: 43.311463, lng: 76.960903, title: 'ГНБ-проект №46' },
+  { lat: 43.313680, lng: 76.959642, title: 'ГНБ-проект №47' },
+  { lat: 43.281366, lng: 76.953588, title: 'ГНБ-проект №48' },
+  { lat: 43.265475, lng: 76.934300, title: 'ГНБ-проект №49' },
+  { lat: 43.260013, lng: 76.919544, title: 'ГНБ-проект №50' },
+  { lat: 43.247002, lng: 76.905562, title: 'ГНБ-проект №51' },
+  { lat: 43.240827, lng: 76.896336, title: 'ГНБ-проект №52' },
+  { lat: 43.239072, lng: 76.895159, title: 'ГНБ-проект №53' },
+  { lat: 43.239843, lng: 76.873864, title: 'ГНБ-проект №54' },
+  { lat: 43.221496, lng: 76.870228, title: 'ГНБ-проект №55' },
+  { lat: 43.203904, lng: 76.885670, title: 'ГНБ-проект №56' },
+  { lat: 43.203910, lng: 76.899728, title: 'ГНБ-проект №57' },
+  { lat: 43.210711, lng: 76.907840, title: 'ГНБ-проект №58' },
+  { lat: 43.188216, lng: 76.922324, title: 'ГНБ-проект №59' },
+  { lat: 43.153089, lng: 76.900898, title: 'ГНБ-проект №60' },
+  { lat: 43.170543, lng: 76.849723, title: 'ГНБ-проект №61' },
+      // Можно добавить остальные
+    ];
+
+    function initMap() {
+      const mapCenter = { lat: 43.238949, lng: 76.889709 };
+      const map = new google.maps.Map(document.getElementById('projectsMap'), {
+        zoom: 10,
+        center: mapCenter,
+      });
+      projectMarkers.forEach((obj) => {
+        new google.maps.Marker({
+          position: { lat: obj.lat, lng: obj.lng },
+          map: map,
+          title: obj.title,
+        });
+      });
+    }
+  </script>
+</body>
+</html>

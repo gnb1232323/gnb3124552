@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Техника в аренду — ЭЛЕКТРОТЕХСНАБ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ======= БАЗОВЫЕ СТИЛИ ======= */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ======= ШАПКА ======= */
+        header {
+            background: linear-gradient(135deg, #0563bb, #3498db);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .logo {
+            font-size: 1.5rem;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-button, .rent-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .rent2-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+        }
+        .rent2-button {
+            margin: 0 auto;
+        }
+        .back-button {
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .rent-button, .rent2-button {
+            right: 20px;
+            background: linear-gradient(45deg, #ffdf00, #ffdf00);
+            color: #333;
+        }
+        .back-button:hover, .rent-button:hover, .rent2-button:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        /* ======= ОСНОВНОЙ КОНТЕЙНЕР ======= */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #0563bb;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #555;
+        }
+
+        /* ======= ГАЛЕРЕЯ ======= */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .gallery-item {
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-caption {
+            padding: 10px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+        }
+
+        /* ======= КНОПКА-ЦЕНТР ======= */
+        .center-button {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        /* ======= МОДАЛЬНОЕ ОКНО ======= */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .modal img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .modal .close {
+            position: absolute;
+            top: 10px; right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal button {
+            background: #0563bb;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .modal button:hover {
+            background: #034f8b;
+        }
+    </style>
+</head>
+<body>
+    <!-- ШАПКА -->
+    <header>
+        <a href="index.html" class="logo">ЭЛЕКТРОТЕХСНАБ</a>
+        <button class="back-button" id="backBtn">На главную</button>
+        <button class="rent-button" id="rentBtn">Арендовать</button>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+    <section class="section-container">
+        <h2>Техника в аренду</h2>
+        <p>
+            Ниже представлено более 30 единиц техники, доступных для аренды. 
+            Выберите нужное и оставьте заявку!
+        </p>
+
+        <!-- ГАЛЕРЕЯ -->
+        <div class="gallery-grid">
+          <!-- 1) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/Qa3rsR6.png">
+            <img src="https://i.imgur.com/Qa3rsR6.png" alt="ГНБ GD360-LS Буровая машина" />
+            <div class="gallery-caption">ГНБ GD360-LS Буровая машина</div>
+          </div>
+
+          <!-- 2) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/Ze7nqFF.png">
+            <img src="https://i.imgur.com/Ze7nqFF.png" alt="ГНБ XZ320B" />
+            <div class="gallery-caption">ГНБ XZ320B</div>
+          </div>
+
+          <!-- 3) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/DyGhXU7.png">
+            <img src="https://i.imgur.com/DyGhXU7.png" alt="ГНБ XZ320D" />
+            <div class="gallery-caption">ГНБ XZ320D</div>
+          </div>
+
+          <!-- 4) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/jDRwQBC.png">
+            <img src="https://i.imgur.com/jDRwQBC.png" alt="ГНБ VERMEER NAVIGATOR D7X11 II" />
+            <div class="gallery-caption">ГНБ VERMEER NAVIGATOR D7X11 II</div>
+          </div>
+
+          <!-- 5) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/hQLrLfg.png">
+            <img src="https://i.imgur.com/hQLrLfg.png" alt="ГНБ XZ1000A" />
+            <div class="gallery-caption">ГНБ XZ1000A</div>
+          </div>
+
+          <!-- 6) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/o3urFwa.png">
+            <img src="https://i.imgur.com/o3urFwa.png" alt="Камаз буровая 4311810" />
+            <div class="gallery-caption">Камаз буровая 4311810</div>
+          </div>
+
+          <!-- 7) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/BNQos2V.png">
+            <img src="https://i.imgur.com/BNQos2V.png" alt="Камаз 43114 1029 02" />
+            <div class="gallery-caption">Камаз 43114 1029 02</div>
+          </div>
+
+          <!-- 8) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/hZzCOA2.png">
+            <img src="https://i.imgur.com/hZzCOA2.png" alt="Камаз 44108-919" />
+            <div class="gallery-caption">Камаз 44108-919</div>
+          </div>
+
+          <!-- 9) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/MihDIwf.png">
+            <img src="https://i.imgur.com/MihDIwf.png" alt="Камаз 431185" />
+            <div class="gallery-caption">Камаз 431185</div>
+          </div>
+
+          <!-- 10) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/jrtjA5j.png">
+            <img src="https://i.imgur.com/jrtjA5j.png" alt="Камаз 65117 N3" />
+            <div class="gallery-caption">Камаз 65117 N3</div>
+          </div>
+
+          <!-- 11) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/ymJ5SYi.png">
+            <img src="https://i.imgur.com/ymJ5SYi.png" alt="Камаз 45143 012-13 Самосвал" />
+            <div class="gallery-caption">Камаз 45143 012-13 Самосвал</div>
+          </div>
+
+          <!-- 12) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/hXuna5E.png">
+            <img src="https://i.imgur.com/hXuna5E.png" alt="Камаз 5320 Самосвал" />
+            <div class="gallery-caption">Камаз 5320 Самосвал</div>
+          </div>
+
+          <!-- 13) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/m0sofai.png">
+            <img src="https://i.imgur.com/m0sofai.png" alt="Экскаватор колесный ЕК-14.2006" />
+            <div class="gallery-caption">Экскаватор колёсный ЕК‑14.2006</div>
+          </div>
+
+          <!-- 14) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/izuz4xF.png">
+            <img src="https://i.imgur.com/izuz4xF.png" alt="Экскаватор ЕК-18-20" />
+            <div class="gallery-caption">Экскаватор ЕК‑18‑20</div>
+          </div>
+
+          <!-- 15) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/UHGb6Mo.jpeg">
+            <img src="https://i.imgur.com/UHGb6Mo.jpeg" alt="Экскаватор гусеничный Hyundai Robex 210LC" />
+            <div class="gallery-caption">Hyundai Robex 210LC (гусеничный)</div>
+          </div>
+
+          <!-- 16) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/2izJchU.png">
+            <img src="https://i.imgur.com/2izJchU.png" alt="Трактор экск-погр JCB4CX4WSSM" />
+            <div class="gallery-caption">Трактор-экскаватор JCB4CX4WSSM</div>
+          </div>
+
+          <!-- 17) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/zbgVK7U.png">
+            <img src="https://i.imgur.com/zbgVK7U.png" alt="Миниэксковатор KOMATSU PC15MR-1" />
+            <div class="gallery-caption">Миниэкскаватор KOMATSU PC15MR-1</div>
+          </div>
+
+          <!-- 18) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/deYR324.png">
+            <img src="https://i.imgur.com/deYR324.png" alt="Грейферный ковш с экскаватором" />
+            <div class="gallery-caption">Экскаватор с грейферным ковшом</div>
+          </div>
+
+          <!-- 19) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/hoJchdN.png">
+            <img src="https://i.imgur.com/hoJchdN.png" alt="Зил 131 Бортовой с манипулятором" />
+            <div class="gallery-caption">ЗИЛ‑131 (бортовой + манипулятор)</div>
+          </div>
+
+          <!-- 20) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/A44mVkd.png">
+            <img src="https://i.imgur.com/A44mVkd.png" alt="Манипулятор Hyundai Hd260" />
+            <div class="gallery-caption">Hyundai Hd260 (манипулятор)</div>
+          </div>
+
+          <!-- 21) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/vDoC5s2.png">
+            <img src="https://i.imgur.com/vDoC5s2.png" alt="Илосос Ford Kargo" />
+            <div class="gallery-caption">Илосос Ford Kargo</div>
+          </div>
+
+          <!-- 22) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/ntguaVZ.png">
+            <img src="https://i.imgur.com/ntguaVZ.png" alt="Сидельный тягач Notth Benz Nd4250fi" />
+            <div class="gallery-caption">Сидельный тягач Notth Benz ND4250fi</div>
+          </div>
+
+          <!-- 23) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/wTJzD3g.png">
+            <img src="https://i.imgur.com/wTJzD3g.png" alt="Сидельный тягач Man Tg S 19360" />
+            <div class="gallery-caption">MAN TG S 19.360 (с/тягач)</div>
+          </div>
+
+          <!-- 24) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/sHjkXO1.png">
+            <img src="https://i.imgur.com/sHjkXO1.png" alt="Цепной траншейный экскаватор" />
+            <div class="gallery-caption">Траншейный экскаватор (цепной)</div>
+          </div>
+
+          <!-- 25) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/qjtSqmN.png">
+            <img src="https://i.imgur.com/qjtSqmN.png" alt="Каналопромывочная машина" />
+            <div class="gallery-caption">Каналопромывочная машина</div>
+          </div>
+
+          <!-- 26) -->
+          <div class="gallery-item" data-image="https://i.imgur.com/prO19gw.png">
+            <img src="https://i.imgur.com/prO19gw.png" alt="Вибропогружатель" />
+            <div class="gallery-caption">Вибропогружатель</div>
+          </div>
+
+          <!-- 27) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/udJKtND.png">
+            <img src="https://i.imgur.com/udJKtND.png" alt="Гидравлический молот" />
+            <div class="gallery-caption">Гидравлический молот</div>
+          </div>
+
+          <!-- 28) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/INT8Npl.png">
+            <img src="https://i.imgur.com/INT8Npl.png" alt="Мини-погрузчики CAT" />
+            <div class="gallery-caption">Мини-погрузчики CAT</div>
+          </div>
+
+          <!-- 29) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/Gtwftuh.png">
+            <img src="https://i.imgur.com/Gtwftuh.png" alt="Установка ГНБ XCMG XZ360Е" />
+            <div class="gallery-caption">ГНБ XCMG XZ360E</div>
+          </div>
+
+          <!-- 30) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/vToHIMw.png">
+            <img src="https://i.imgur.com/vToHIMw.png" alt="Ямобур" />
+            <div class="gallery-caption">Ямобур</div>
+          </div>
+
+          <!-- 31) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/R6nXG61.png">
+            <img src="https://i.imgur.com/R6nXG61.png" alt="Тралл" />
+            <div class="gallery-caption">Трал для перевозки тяжёлой техники</div>
+          </div>
+
+          <!-- 32) -->
+          <div class="gallery-item"  data-image="https://i.imgur.com/d0OZM6o.png">
+            <img src="https://i.imgur.com/d0OZM6o.png" alt="Погрузчик дизельный вилочный FD30" />
+            <div class="gallery-caption">Вилочный погрузчик FD30 (дизель)</div>
+          </div>
+
+        </div>
+
+        <div class="center-button">
+            <button class="rent2-button" id="rentBtn2">Арендовать</button>
+        </div>
+    </section>
+
+    <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">×</span>
+            <img id="modalImage" src="" alt="">
+            <p id="modalCaption"></p>
+            <button id="orderButton">Заказать</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== Модальное окно ====================
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modalImage');
+        const modalCaption = document.getElementById('modalCaption');
+        const closeModal = document.getElementById('closeModal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        // Открываем модальное окно по клику
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const image = item.getAttribute('data-image');
+                const caption = item.querySelector('.gallery-caption').textContent;
+
+                modalImage.src = image;
+                modalCaption.textContent = caption;
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Закрываем модальное окно (по кнопке "×" или клику вне content)
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Кнопка "Заказать" внутри модалки => WhatsApp c названием техники
+        document.getElementById('orderButton').addEventListener('click', () => {
+            const name = modalCaption.textContent.trim();
+            const text = `Здравствуйте! Хочу арендовать: ${name}`;
+            const whatsappNumber = '77777470986'; 
+            const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+            window.open(link, '_blank');
+        });
+
+        // ==================== Кнопки "Арендовать" ====================
+        // Верхняя (rentBtn) и нижняя (rentBtn2) одинаковый функционал
+        const textForRent = 'Здравствуйте! Хочу узнать об аренде спецтехники. Подскажите, пожалуйста, детали.';
+        const whatsappNumber = '77777470986';
+
+        document.getElementById('rentBtn').addEventListener('click', () => {
+            const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(textForRent)}`;
+            window.open(link, '_blank');
+        });
+
+        document.getElementById('rentBtn2').addEventListener('click', () => {
+            const link = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(textForRent)}`;
+            window.open(link, '_blank');
+        });
+
+        // ==================== Кнопка "На главную" ====================
+        document.getElementById('backBtn').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
